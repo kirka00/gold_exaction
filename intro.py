@@ -18,7 +18,7 @@ class Menu:
     def menu(self):
         done = True
         pygame.font.init()
-        font_menu = pygame.font.Font('Oswald-Light.ttf', 50)  # шрифт
+        font_menu = pygame.font.Font('Oswald\static\Oswald-Light.ttf', 50)  # шрифт
         punkt = 0
         while done:
             screen.fill((0, 100, 200))
