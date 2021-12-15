@@ -1,4 +1,4 @@
-## Gold exaction
+## Stealing gifts
 
 Сайт, посвящённый проекту:
 https://bouncy-cornflower-ac6.notion.site/Project-Gold-exaction-Kobzev-and-Ryabov-23c2cb8d3eda4e8b98fe21321921b8c9
