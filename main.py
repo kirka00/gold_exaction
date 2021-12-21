@@ -1,26 +1,20 @@
 import pygame
-from intro import game_intro
-#from end import end_game
-'''from levels import Level_1, Level_2, Level_3
-from player import Player'''
-
+from intro import game_intro  # начальный экран
+from game_play import play  # первые уровни
 
 def main():  # основная функция игры
     pygame.init()  #  Инициализация
-    width, height = 800, 600  # размеры окна
-    screen = pygame.display.set_mode((width, height))  # установка размеров окна
+    size = scr_width, scr_height = 800, 600  # размеры окна
+    screen = pygame.display.set_mode(size)  # установка размеров окна
     pygame.display.set_caption('Gold exaction')  # заголовок окна
-    running = True  # основной цикл игры
-    '''player = Player()  # создание героя
-    levels = []  # создание уровней
-    levels.append(Level_1(player))  # добавление героя'''
-
-    while running:
+    running = True  
+    while running:  # основной цикл игры
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # при закрытии прекращается цикл
                 running = False
         if running:
-            game_intro()
+            #game_intro()  # интро игры
+            play()  # бета уровень
     pygame.quit()  # закртытие программы
 
 
