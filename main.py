@@ -1,5 +1,5 @@
 import pygame
-from intro import game_intro  # начальный экран
+#from intro import game_intro  # начальный экран
 from game_play import play  # первые уровни
 
 def main():  # основная функция игры
