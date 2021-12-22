@@ -1,5 +1,6 @@
 import sys
 import pygame
+from game_play import play
 
 screen = pygame.display.set_mode((800, 600), pygame.NOFRAME)
 bg = pygame.image.load("data/bg_for_menu.png")  # можно убрать если не будет выбора фона в настройках
@@ -52,7 +53,7 @@ class Menu:
                                 punkt = 0
                     if i.type == pygame.MOUSEBUTTONDOWN and i.button == 1:
                         if punkt == 0:
-                            pass
+                            play()
                         elif punkt == 1:
                             settings()
                         elif punkt == 2:
