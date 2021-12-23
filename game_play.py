@@ -1,6 +1,7 @@
 import pygame
 from player import Player, scr_width, scr_height, screen  # игрок, экран и его размеры
 from levels import Level_1  # уровни
+#  from intro_func import intro_func
 
 
 def play():  # основная тестовая функция
@@ -20,6 +21,9 @@ def play():  # основная тестовая функция
             if event.type == pygame.QUIT:  # выход из игры
                 running = False
             if event.type == pygame.KEYDOWN:  # обработка стрелок клавиатуры
+                if event.key == pygame.K_ESCAPE:
+                    running = False
+                    intro_func()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево

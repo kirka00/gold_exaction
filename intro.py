@@ -1,6 +1,7 @@
 import sys
 import pygame
 from game_play import play
+#  from intro_func import intro_func
 
 screen = pygame.display.set_mode((800, 600), pygame.NOFRAME)
 bg = pygame.image.load("data/bg_for_menu.png")  # можно убрать если не будет выбора фона в настройках
@@ -66,20 +67,20 @@ class Menu:
         pygame.quit()
 
 
-def intro():  # в punkts 1 корды потом что будет написано и 2 кортежа в 1 цвет когда не выбраны а во 2 когда выбраны ласт номер
+def settings():
+    punkts2 = [(120, 140, u'Что-то', (41, 49, 51), (76, 81, 74), 5),
+               (120, 210, u'Back', (41, 49, 51), (76, 81, 74), 6)]
+    game1 = Menu(punkts2)
+    game1.menu()
+
+
+def intro():
     punkts = [(120, 70, u'Game', (41, 49, 51), (76, 81, 74), 0),  # запуск
               (120, 140, u'Settings', (41, 49, 51), (76, 81, 74), 1),  # настройки
               (120, 210, u'Quit', (41, 49, 51), (76, 81, 74), 2),  # выход
               (120, 280, u'Support', (41, 49, 51), (76, 81, 74), 3)]  # поддержка
     game = Menu(punkts)
     game.menu()
-
-
-def settings():
-    punkts2 = [(120, 140, u'Что-то', (41, 49, 51), (76, 81, 74), 5),
-               (120, 210, u'Back', (41, 49, 51), (76, 81, 74), 6)]
-    game1 = Menu(punkts2)
-    game1.menu()
 
 
 intro()
