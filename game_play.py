@@ -1,8 +1,7 @@
 import pygame
+import sys
 from player import Player, scr_width, scr_height, screen  # игрок, экран и его размеры
 from levels import Level_1  # уровни
-#  from intro_func import intro_func
-
 
 def play():  # основная тестовая функция
     pygame.display.set_caption("1 уровень (бета)")  # название окна
@@ -20,10 +19,11 @@ def play():  # основная тестовая функция
         for event in pygame.event.get():  # следим за действиями играющего
             if event.type == pygame.QUIT:  # выход из игры
                 running = False
-            if event.type == pygame.KEYDOWN:  # обработка стрелок клавиатуры
+                sys.exit()
+            if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
                     running = False
-                    intro_func()
+                    sys.exit()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево

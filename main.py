@@ -1,26 +1,21 @@
 import pygame
-from intro_func import intro_func
-#from end import end_game
-'''from levels import Level_1, Level_2, Level_3
-from player import Player'''
+from intro import intro_func
 
 
 def main():  # основная функция игры
-    pygame.init()  #  Инициализация
-    width, height = 800, 600  # размеры окна
-    screen = pygame.display.set_mode((width, height))  # установка размеров окна
-    pygame.display.set_caption('Gold exaction')  # заголовок окна
-    running = True  # основной цикл игры
-    '''player = Player()  # создание героя
-    levels = []  # создание уровней
-    levels.append(Level_1(player))  # добавление героя'''
-
-    while running:
+    pygame.init()  # Инициализация
+    size = scr_width, scr_height = 800, 600  # размеры окна
+    screen = pygame.display.set_mode(size)  # установка размеров окна
+    pygame.display.set_caption('Stealing gifts')  # заголовок окна
+    running = True
+    draw = True
+    while running:  # основной цикл игры
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # при закрытии прекращается цикл
                 running = False
-        intro_func()
-    #  pygame.quit()  # закрытие программы
+        if running:
+            intro_func()
+    pygame.quit()  # закртытие программы
 
 
 if __name__ == '__main__':  # запуск игры
