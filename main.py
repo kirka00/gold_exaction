@@ -8,7 +8,6 @@ def main():  # основная функция игры
     screen = pygame.display.set_mode(size)  # установка размеров окна
     pygame.display.set_caption('Stealing gifts')  # заголовок окна
     running = True
-    draw = True
     while running:  # основной цикл игры
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # при закрытии прекращается цикл

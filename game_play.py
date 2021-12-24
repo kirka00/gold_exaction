@@ -18,11 +18,9 @@ def play():  # основная тестовая функция
     while running:  # основной цикл
         for event in pygame.event.get():  # следим за действиями играющего
             if event.type == pygame.QUIT:  # выход из игры
-                running = False
                 sys.exit()
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
-                    running = False
                     sys.exit()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()

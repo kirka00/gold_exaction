@@ -8,7 +8,6 @@ bg = load_image("background.png")  # можно убрать если не бу�
 pygame.mouse.set_visible(False)
 cursor = load_image('cur\cursor.png')
 
-
 class Menu:
     def __init__(self, punkts):
         self.punkts = punkts
@@ -22,14 +21,13 @@ class Menu:
 
     def menu(self):
         done = True
-        pygame.font.init()
         font_menu = pygame.font.Font('data/Oswald/static/Oswald-Light.ttf', 50)  # шрифт
         punkt = 0
-        screen.blit(bg, (0, 0))
         while done:
-            if pygame.mouse.get_focused():
-                screen.blit(bg, (0, 0))
-                screen.blit(cursor, pygame.mouse.get_pos())
+            pygame.display.update()
+
+            screen.blit(bg, (0, 0))
+            screen.blit(cursor, pygame.mouse.get_pos())
             mp = pygame.mouse.get_pos()
             for i in self.punkts:  # выбор мышкой надо пофиксить но вроде работает как надо
                 if mp[0] > i[0] and mp[0] < i[0] + 155 and mp[1] > i[1] and mp[1] < i[1] + 50:
@@ -37,6 +35,7 @@ class Menu:
             self.render(screen, font_menu, punkt)  # 1-экран 2-шрифт 3-забыл что
             for i in pygame.event.get():
                 if i.type == pygame.QUIT:
+                    done = False
                     sys.exit()
                 if i.type == pygame.KEYDOWN:
                     if i.key == pygame.K_ESCAPE:  # немедленный выход
@@ -61,7 +60,6 @@ class Menu:
                     elif punkt == 6:
                         intro_func()
                 pygame.display.flip()
-
         pygame.quit()
 
 
