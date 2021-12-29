@@ -8,11 +8,6 @@ default_font =  pygame.font.Font('data/Oswald/static/Oswald-Light.ttf', 35)  # �
 large_font = pygame.font.Font('data/Oswald/static/Oswald-Light.ttf', 50)
 
 
-# для race.py
-car_width = 73  # ширина машины
-
-
-
 def terminate():  # закрытие программы
     pygame.quit()
     sys.exit()

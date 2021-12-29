@@ -1,38 +1,17 @@
 import random
 import pygame
 from load import load_image, screen
+from music import car_music
 from settings import scr_width, scr_height, car_width, clock, \
     default_font, large_font, terminate
 
-#crash_sound = pygame.mixer.Sound("data/sounds/sound_car.ogg")
-pygame.init()
-car_image = load_image('car.png')  # картинка машины
-pygame.display.set_caption('Stealing gifts | Финал (бета)')  # заголовок экрана
-pause = False  # рауза игры
-#crash = True
-
-
-def draw_coins(coins):  # вывод количества очков на экран
-    conclusion = default_font.render(
-        f'Количество очков: {coins}', True, 'black')
-    screen.blit(conclusion, (0, 0))
-
-
-def text_in_screen(text, font):  # вывод текста на экран
-    conclusion = font.render(text, True, 'black')
-    return conclusion, conclusion.get_rect()
-
-
-def obstacles(thingx, thingy, thingw, thingh, color):  # отрисовка препятсвий
-    pygame.draw.rect(screen, color, [thingx, thingy, thingw, thingh])
-
 
 def draw_car(x, y):  # рисовка машины в нужном месте
+    car_image = load_image('car.png')  # картинка машины
     screen.blit(car_image, (x, y))
 
 
 def crash():  # столкновение
-    # pygame.mixer.Sound.play(crash_sound)  # звук столкновения
     pygame.mixer.music.stop()  # глушим звук мотора
     TextSurf, TextRect = text_in_screen('Вы умерли!', large_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
@@ -90,12 +69,27 @@ def stopping():
             pygame.display.flip()  # обновление экрана
 
 
+def draw_coins(coins):  # вывод количества очков на экран
+    conclusion = default_font.render(
+        f'Количество очков: {coins}', True, 'black')
+    screen.blit(conclusion, (0, 0))
+
+
+def text_in_screen(text, font):  # вывод текста на экран
+    conclusion = font.render(text, True, 'black')
+    return conclusion, conclusion.get_rect()
+
+
+def obstacles(thingx, thingy, thingw, thingh, color):  # отрисовка препятсвий
+    tree = load_image('tree.png')
+    screen.blit(tree, (thingx + 15, thingy - 100))
+    pygame.draw.rect(screen, color, [thingx, thingy, thingw, thingh])
+
+
 def game():
     global pause  # не забываем делать переменную pause глобальной
-    pygame.mixer.music.load('data/sounds/sound_car.ogg')  # музыка
-    pygame.mixer.music.set_volume(0.4)
-    pygame.mixer.music.play(-1)  # зацикливание
-    ''' "Критерии машины '''
+    ''' Критерии машины '''
+    car_width = 73  # ширина машины
     x, y = scr_width / 2 - 30, 480  # спаун машины
     score_car = 7  # скорость машины
     score_x = 0  # изменение скорости машины
@@ -103,8 +97,13 @@ def game():
     obstacle_start_x = random.randint(0, scr_width)  # спаун препятствий
     obstacle_start_y = -600  # выход препятствия сверху экрана
     obstacle_speed = 8  # начальная скорость препятствия
-    obstacle_width, obstacle_height = 80, 80  # размер препятствия
+    obstacle_width, obstacle_height = 80, 10  # размер препятствия
     coins = 0  # очки
+    ''' Остальное '''
+    pygame.display.set_caption(
+        'Stealing gifts | Финал (бета)')  # заголовок экрана
+    pause = False  # рауза игры
+    car_music()
     while True:
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # выход из игры
@@ -122,7 +121,7 @@ def game():
         x += score_x  # перемещение машины
         screen.fill('white')  # пока фон белый
         obstacles(obstacle_start_x, obstacle_start_y,  # отрисовка препятствий
-                  obstacle_width, obstacle_height, 'blue')
+                  obstacle_width, obstacle_height, (162, 101, 62))
         obstacle_start_y += obstacle_speed  # корректировка y для препятствий
         draw_car(x, y)  # рисовка машины
         draw_coins(coins)  # вывод очков

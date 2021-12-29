@@ -1,7 +1,6 @@
 import pygame
 from load import load_image
 from settings import size, scr_width, scr_height
-pygame.init()  # инициализация для корректной работы функции загрузки - load_image
 screen = pygame.display.set_mode(size)
 
 

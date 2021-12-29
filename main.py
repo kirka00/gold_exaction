@@ -2,6 +2,7 @@ import pygame
 from intro import intro_func
 from settings import size
 from load import load_image
+from music import main_sound
 
 screen = pygame.display.set_mode(size)  # установка размеров окна
 def main():  # основная функция игры
@@ -9,6 +10,7 @@ def main():  # основная функция игры
     pygame.display.set_caption('Stealing gifts')  # заголовок окна
     game_icon = load_image('tree.png')
     pygame.display.set_icon(game_icon)
+    main_sound()
     running = True
     while running:  # основной цикл игрыgame_icon
         for event in pygame.event.get():  # отслеживание действий
