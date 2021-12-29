@@ -1,10 +1,11 @@
 import pygame
 import sys
-from player import Player, scr_width, scr_height, screen  # игрок, экран и его размеры
+from settings import scr_width, scr_height
+from player import Player, screen
 from levels import Level_1  # уровни
 
 def play():  # основная тестовая функция
-    pygame.display.set_caption("1 уровень (бета)")  # название окна
+    pygame.display.set_caption("Stealing gifts | 1 уровень (бета)")  # название окна
     player = Player()  # создание игрока
     level_list = [Level_1(player)]  # уровни (скоро будут новые)
     cur_level = level_list[0]  # выбор уровня
@@ -33,7 +34,7 @@ def play():  # основная тестовая функция
                     player.stop()  # остновка, если егрой идёт влево
                 elif event.key == pygame.K_RIGHT:
                     player.stop()  # остновка, если вправо
-        active_session.update()  # обновление игрока
+        active_session.update()  # обновление активной сессии игры
         cur_level.update()  # обновление уровня
         if player.rect.left < 0:  # ограничение движения за экран слева
             player.rect.left = 0

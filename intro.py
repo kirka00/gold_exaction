@@ -1,9 +1,9 @@
 import sys
 import pygame
 from game_play import play
-from load import load_image
+from load import load_image, screen
+from settings import large_font
 
-screen = pygame.display.set_mode((800, 600), pygame.NOFRAME)
 bg = load_image("background.png")  # можно убрать если не будет выбора фона в настройках
 pygame.mouse.set_visible(False)
 cursor = load_image('cur\cursor.png')
@@ -21,11 +21,10 @@ class Menu:
 
     def menu(self):
         done = True
-        font_menu = pygame.font.Font('data/Oswald/static/Oswald-Light.ttf', 50)  # шрифт
+        font_menu = large_font  # шрифт
         punkt = 0
         while done:
             pygame.display.update()
-
             screen.blit(bg, (0, 0))
             screen.blit(cursor, pygame.mouse.get_pos())
             mp = pygame.mouse.get_pos()
