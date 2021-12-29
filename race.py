@@ -2,7 +2,7 @@ import random
 import pygame
 from load import load_image, screen
 from music import car_music
-from settings import scr_width, scr_height, car_width, clock, \
+from settings import scr_width, scr_height, clock, \
     default_font, large_font, terminate
 
 
