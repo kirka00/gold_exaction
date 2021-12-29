@@ -7,26 +7,25 @@ screen = pygame.display.set_mode(size)
 
 class Player(pygame.sprite.Sprite):  # класс главного героя
     # изображение главного героя
-    image = load_image('santa2.png')
+    image = load_image('santa_test2.png')
 
     def __init__(self, *group):
         super().__init__(*group)
         self.right = True  # изначально герой повернут вправо
         self.hero_image = Player.image
         self.rect = self.hero_image.get_rect()  # размеры игрока
-        self.rect.height = self.rect.height - 10  # делаем его ниже
         self.score_x = 0  # векторы скорости игрока
         self.score_y = 0
 
     def gravity(self):  # гравитация
-        self.score_y += 0.9
+        self.score_y += 1
 
         if self.score_y >= 0 and self.rect.y >= scr_height - self.rect.height:
             self.score_y = 0    # смена значения у на 0, при нахождении на "земле"
             self.rect.y = scr_height - self.rect.height
 
     def jump(self):  # прыжок
-        self.rect.y += 10  # проверяем, есьб ли что над героем
+        self.rect.y += 10  # проверяем, есть ли что-то над героем
         collide = pygame.sprite.spritecollide(
             self, self.level.platforms, False)  # проверка на коллизию
         self.rect.y -= 10  # возращение на "землю"
@@ -35,7 +34,7 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
 
     def go_to_left(self):  # движение игрока влево
         self.score_x = -10  # Двигаем игрока влево по Х
-        if(self.right):  # проверка на то, куда он смотрит
+        if self.right:  # проверка на то, куда он смотрит
             self.flip()  # если нужно, то переворачиваем
             self.right = False
 
@@ -67,6 +66,7 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
                 self.rect.right = block.rect.left
             elif self.score_x < 0:  # если влево
                 self.rect.left = block.rect.right
+
 
     def flip(self):  # отражение изображения при поворте
         self.image = pygame.transform.flip(self.image, True, False)
