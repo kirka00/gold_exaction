@@ -2,6 +2,7 @@ import sys
 import pygame
 from game_play import play
 from load import load_image
+from settings import terminate, default_font
 
 screen = pygame.display.set_mode((800, 600), pygame.NOFRAME)
 bg = load_image("background.png")  # можно убрать если не будет выбора фона в настройках
@@ -21,11 +22,10 @@ class Menu:
 
     def menu(self):
         done = True
-        font_menu = pygame.font.Font('data/Oswald/static/Oswald-Light.ttf', 50)  # шрифт
+        font_menu = default_font  # шрифт
         punkt = 0
         while done:
             pygame.display.update()
-
             screen.blit(bg, (0, 0))
             screen.blit(cursor, pygame.mouse.get_pos())
             mp = pygame.mouse.get_pos()
@@ -36,10 +36,10 @@ class Menu:
             for i in pygame.event.get():
                 if i.type == pygame.QUIT:
                     done = False
-                    sys.exit()
+                    terminate()
                 if i.type == pygame.KEYDOWN:
                     if i.key == pygame.K_ESCAPE:  # немедленный выход
-                        sys.exit()
+                        terminate()
                     if i.key == pygame.K_UP:  # переключение между кнопками стрелочками
                         if punkt > 0:
                             punkt -= 1
@@ -56,7 +56,7 @@ class Menu:
                     elif punkt == 1:
                         settings()
                     elif punkt == 2:
-                        sys.exit()
+                        terminate()
                     elif punkt == 6:
                         intro_func()
                 pygame.display.flip()

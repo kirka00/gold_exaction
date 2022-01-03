@@ -1,16 +1,14 @@
 import pygame
 from load import load_image
-pygame.init()  # инициализация для корректной работы функции загрузки - load_image
-size = scr_width, scr_height = 800, 600  # размеры окна
-screen = pygame.display.set_mode(size)
+from settings import scr_height, scr_width
 
 
 class Player(pygame.sprite.Sprite):  # класс главного героя
     # изображение главного героя
     image = load_image('santa_test2.png')
 
-    def __init__(self, *group):
-        super().__init__(*group)
+    def __init__(self):
+        super().__init__()
         self.right = True  # изначально герой повернут вправо
         self.hero_image = Player.image
         self.rect = self.hero_image.get_rect()  # размеры игрока
@@ -19,7 +17,6 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
 
     def gravity(self):  # гравитация
         self.score_y += 1
-
         if self.score_y >= 0 and self.rect.y >= scr_height - self.rect.height:
             self.score_y = 0    # смена значения у на 0, при нахождении на "земле"
             self.rect.y = scr_height - self.rect.height
@@ -70,3 +67,20 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
 
     def flip(self):  # отражение изображения при поворте
         self.image = pygame.transform.flip(self.image, True, False)
+
+
+class Camera:
+    # зададим начальный сдвиг камеры
+    def __init__(self):
+        self.dx = 0
+        self.dy = 0
+        
+    # сдвинуть объект obj на смещение камеры
+    def apply(self, obj):
+        obj.rect.x += self.dx
+        obj.rect.y += self.dy
+    
+    # позиционировать камеру на объекте target
+    def update(self, target):
+        self.dx = -(target.rect.x + target.rect.w // 2 - scr_width // 2)
+        self.dy = -(target.rect.y + target.rect.h // 2 - scr_height // 2)

@@ -1,5 +1,5 @@
 import sys
-
+from race import game
 from load import load_image
 import pygame
 from demo1 import lvl
@@ -59,7 +59,7 @@ class Charcoal(pygame.sprite.Sprite):
 
 
 class Truba(pygame.sprite.Sprite):
-    image = load_image('truba.png')  # изображение платформы
+    image = load_image('pipe.png')  # изображение платформы
 
     def __init__(self, width, height):
         super().__init__()
@@ -73,13 +73,13 @@ class Level(object):  # класс для уровня
 
     def draw(self, screen):  # рисовка объектов
         global cookies
-        background = load_image("background.png")  # задний фон
+        background = load_image("back_game3.png")  # задний фон
         screen.blit(background, (0, 0))
         self.platforms.draw(screen)  # платформы
         cookies.draw(screen)
         presents.draw(screen)
 
-    def update(self):  # обновление жкрана
+    def update(self):  # обновление экрана
         global cookies, delete, presents, delete1, tasks
         self.platforms.update()
         cookies.update()
@@ -146,5 +146,4 @@ def check(coords):
     if coords[0] // 32 == 11 and (coords[1] - 24) // 32 == 11:  # present
         delete1 = True
     if coords[0] // 32 == 20 and (coords[1] - 24) // 32 == 15 and tasks == 2:  # escape
-        print('gg')
-        sys.exit()
+        game()

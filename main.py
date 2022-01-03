@@ -1,5 +1,6 @@
 import pygame
 from intro import intro_func
+from music import main_sound
 
 
 def main():  # основная функция игры
@@ -8,6 +9,7 @@ def main():  # основная функция игры
     screen = pygame.display.set_mode(size)  # установка размеров окна
     pygame.display.set_caption('Stealing gifts')  # заголовок окна
     running = True
+    main_sound()
     while running:  # основной цикл игры
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # при закрытии прекращается цикл

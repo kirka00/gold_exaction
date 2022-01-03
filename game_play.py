@@ -1,7 +1,9 @@
 import pygame
 import sys
-from player import Player, scr_width, scr_height, screen  # игрок, экран и его размеры
+from player import Player, Camera
 from levels import DemoLevel1, check  # уровни
+from settings import terminate, scr_width, scr_height
+from load import screen
 
 
 def play():  # основная тестовая функция
@@ -12,17 +14,17 @@ def play():  # основная тестовая функция
     active_session = pygame.sprite.Group()  # активная сессия
     player.level = cur_level
     player.rect.x = 0  # начальное положение игрока
-    player.rect.y = scr_height - player.rect.height
+    player.rect.y = 520
     active_session.add(player)
     running = True  # флаг для цикла
     clock = pygame.time.Clock()  # для скорости обновления экрана
     while running:  # основной цикл
         for event in pygame.event.get():  # следим за действиями играющего
             if event.type == pygame.QUIT:  # выход из игры
-                sys.exit()
+                terminate()
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
-                    sys.exit()
+                    terminate()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево
