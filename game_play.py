@@ -1,20 +1,27 @@
 import pygame
 import sys
 from player import Player, Camera
-from levels import DemoLevel1, check  # уровни
+from levels import DemoLevel1, DemoLevel2, check, flag_on_lvl2 
 from settings import terminate, scr_width, scr_height
 from load import screen
 
 
 def play():  # основная тестовая функция
+    global flag_on_lvl2
     pygame.display.set_caption("1 уровень (бета)")  # название окна
     player = Player()  # создание игрока
-    level_list = [DemoLevel1(player)]  # уровни (скоро будут новые)
-    cur_level = level_list[0]  # выбор уровня
+    level_list = [DemoLevel1(player), DemoLevel2(player)]  # уровни 
+    if flag_on_lvl2:  # выбор уровня
+        cur_level = level_list[1]
+        player.rect.x = 0  # начальное положение игрока
+        player.rect.y = 20
+    else:
+        cur_level = level_list[0]
+        player.rect.x = 0  # начальное положение игрока
+        player.rect.y = 520
     active_session = pygame.sprite.Group()  # активная сессия
     player.level = cur_level
-    player.rect.x = 0  # начальное положение игрока
-    player.rect.y = 520
+    
     active_session.add(player)
     running = True  # флаг для цикла
     clock = pygame.time.Clock()  # для скорости обновления экрана

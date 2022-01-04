@@ -5,12 +5,13 @@ from music import car_music
 from settings import scr_width, scr_height, clock, \
     default_font, large_font, terminate
 
-
+pygame.init()  # инициализация для шрифта
+size = scr_width, scr_height = 800, 600  # размеры окна
 def draw_car(x, y):  # рисовка машины в нужном месте
     car_image = load_image('car.png')  # картинка машины
     screen.blit(car_image, (x, y))
 
-    
+
 def crash():  # столкновение
     pygame.mixer.music.stop()  # глушим звук мотора
     TextSurf, TextRect = text_in_screen('Вы умерли!', large_font)

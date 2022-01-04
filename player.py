@@ -65,7 +65,7 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
                 self.rect.left = block.rect.right
 
 
-    def flip(self):  # отражение изображения при поворте
+    def flip(self):  # отражение изображения при повороте
         self.image = pygame.transform.flip(self.image, True, False)
 
 
