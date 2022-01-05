@@ -1,7 +1,7 @@
 import os
 import pygame
 
-pygame.init()
+pygame.init()  # инициализация для корректной работы загрузки
 screen = pygame.display.set_mode([800, 600])  # установка размеров окна
 def load_image(name, colorkey=None):
     fullname = os.path.join('data\images', name)

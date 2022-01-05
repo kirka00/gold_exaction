@@ -3,7 +3,7 @@ import pygame
 from load import load_image, screen
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    default_font, large_font, terminate
+    default_font, terminate
 
 pygame.init()  # инициализация для шрифта
 size = scr_width, scr_height = 800, 600  # размеры окна
@@ -14,7 +14,7 @@ def draw_car(x, y):  # рисовка машины в нужном месте
 
 def crash():  # столкновение
     pygame.mixer.music.stop()  # глушим звук мотора
-    TextSurf, TextRect = text_in_screen('Вы умерли!', large_font)
+    TextSurf, TextRect = text_in_screen('Вы умерли!', default_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод информации о проигрыше
     while True:  # пока есть возможность переиграть
@@ -51,7 +51,7 @@ def continuation():  # продолжегне игры
 
 def stopping():
     pygame.mixer.music.pause()
-    TextSurf, TextRect = text_in_screen('Пауза', large_font)
+    TextSurf, TextRect = text_in_screen('Пауза', default_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод текста на экран
     while pause:
@@ -102,7 +102,7 @@ def game():
     coins = 0  # очки
     ''' Остальное '''
     pygame.display.set_caption(
-        'Stealing gifts | Финал (бета)')  # заголовок экрана
+        'Stealing gifts | Финал')  # заголовок экрана
     pause = False  # рауза игры
     car_music()
     while True:
@@ -124,7 +124,7 @@ def game():
         obstacles(obstacle_start_x, obstacle_start_y,  # отрисовка препятствий
                   obstacle_width, obstacle_height, (162, 101, 62))
         obstacle_start_y += obstacle_speed  # корректировка y для препятствий
-        draw_car(x, y)  # рисовка машины
+        draw_car(x, y)  # рисовка машины по x и y
         draw_coins(coins)  # вывод очков
         if x < 0 or x > scr_width - car_width:
             crash()  # ограничители

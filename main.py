@@ -1,11 +1,11 @@
 import pygame
 from intro import intro_func
 from music import main_sound
+from settings import size
 
 
 def main():  # основная функция игры
     pygame.init()  # Инициализация
-    size = scr_width, scr_height = 800, 600  # размеры окна
     screen = pygame.display.set_mode(size)  # установка размеров окна
     pygame.display.set_caption('Stealing gifts')  # заголовок окна
     running = True

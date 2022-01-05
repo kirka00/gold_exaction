@@ -1,6 +1,6 @@
 import sys
 from race import game
-from load import load_image
+from load import load_image, screen
 import pygame
 from demo1 import lvl_1, lvl_2
 cookies = pygame.sprite.Group()
@@ -38,9 +38,10 @@ class Presents(pygame.sprite.Sprite):
         self.add(group)
         self.rect.width = 30
         self.rect.height = 30
+        print(self.rect.y)
 
 
-class Truba(pygame.sprite.Sprite):
+class Pipe(pygame.sprite.Sprite):
     image = load_image('pipe.png')  # изображение платформы
 
     def __init__(self, width, height):
@@ -54,7 +55,7 @@ class Level(object):  # класс для уровня
         self.platforms = pygame.sprite.Group()  # группа спрайтов
 
     def draw(self, screen):  # рисовка объектов
-        global cookies
+        global cookies, presents
         background = load_image("back_game3.png")  # задний фон
         screen.blit(background, (0, 0))
         self.platforms.draw(screen)  # платформы
@@ -73,11 +74,11 @@ class Level(object):  # класс для уровня
             presents.remove(presents)
             delete1 = False
             tasks += 1
-            if tasks == 2:
-                block = Truba(0, 0)
-                block.rect.x = 20 * 32  # координата x
-                block.rect.y = 17 * 32 + 24  # координата y
-                self.platforms.add(block)  # добавление в группу
+        if tasks == 2:
+            block = Pipe(0, 0)
+            block.rect.x = 770  # координата x
+            block.rect.y = 82 # координата y
+            self.platforms.add(block)  # добавление в группу
 
 
 class DemoLevel1(Level):
@@ -101,8 +102,7 @@ class DemoLevel1(Level):
                     present = Presents(32, 32, presents)
                     present.rect.x = j * 32  # координата x
                     present.rect.y = i * 32 + 24  # координата y
-                    #presents.add(present)  # добавление в группу
-                    print(len(presents.sprites()))
+                    presents.add(present)  # добавление в группу
 
 
 class DemoLevel2(Level):
@@ -130,7 +130,7 @@ class DemoLevel2(Level):
                     print(len(presents.sprites()))
 
 def check(coords):
-    print(coords[0])
+    print(coords[0], coords[1])
     global flag_on_lvl2
     global delete, delete1, tasks
     if coords[0] // 32 == 2 and (coords[1] - 24) // 32 == 11:  # cookie
@@ -140,5 +140,6 @@ def check(coords):
         print(len(presents.sprites()))
     if coords[0] // 32 == 20 and (coords[1] - 24) // 32 == 15 and tasks == 2:  # escape
         game()
-    if coords[0] == 773:
+    if coords[0] == 773 and coords[1] == 32:
+        game()
         flag_on_lvl2 = False
