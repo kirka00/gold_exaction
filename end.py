@@ -1,7 +1,6 @@
 import pygame
+from load import screen
 
-# test (финальная сцена)
-screen = pygame.display.set_mode((800, 600))
 def end_game():
     end = True
     while end:
@@ -12,6 +11,8 @@ def end_game():
         if end:
             screen.fill('white')
             myfont = pygame.font.SysFont('Comic Sans MS', 30)
-            textsurface = myfont.render('End Game!', False, ('black'))
+            textsurface = myfont.render('End Game!', True, ('black'))
             screen.blit(textsurface,(0, 0))
             pygame.display.update()
+
+end_game()

@@ -1,12 +1,11 @@
-import random
 import pygame
+import random
 from load import load_image, screen
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    default_font, terminate
+    small_font, terminate
 
-pygame.init()  # инициализация для шрифта
-size = scr_width, scr_height = 800, 600  # размеры окна
+
 def draw_car(x, y):  # рисовка машины в нужном месте
     car_image = load_image('car.png')  # картинка машины
     screen.blit(car_image, (x, y))
@@ -14,15 +13,20 @@ def draw_car(x, y):  # рисовка машины в нужном месте
 
 def crash():  # столкновение
     pygame.mixer.music.stop()  # глушим звук мотора
-    TextSurf, TextRect = text_in_screen('Вы умерли!', default_font)
+    TextSurf, TextRect = text_in_screen('Вы умерли!', small_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод информации о проигрыше
     while True:  # пока есть возможность переиграть
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 terminate()  # выход из игры
+            if event.type == pygame.KEYDOWN:  # продолжение игры
+                if event.key == pygame.K_SPACE:
+                    racing()
+                if event.key == pygame.K_ESCAPE:  # выход из игры на Escape
+                    terminate()
         button('Играть заново', 150, 450, 200, 50,
-               'green', 'white', game)  # кнопки для выхода и переигрыша
+               'green', 'white', racing)  # кнопки для выхода и переигрыша
         button('Выход', 550, 450, 100, 50, 'red', 'white', terminate)
         pygame.display.flip()
 
@@ -38,7 +42,7 @@ def button(msg, x, y, w, h, color, direct_color, do=None):  # рисовка к�
             do()  # срабатывает нужная нам функция
     else:  # в ином случае просто рисуем обычные кнопки
         pygame.draw.rect(screen, color, (x, y, w, h))
-    textSurf, textRect = text_in_screen(msg, default_font)  # настройка текста
+    textSurf, textRect = text_in_screen(msg, small_font)  # настройка текста
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)  # вывод кнопок на экран
 
@@ -51,7 +55,7 @@ def continuation():  # продолжегне игры
 
 def stopping():
     pygame.mixer.music.pause()
-    TextSurf, TextRect = text_in_screen('Пауза', default_font)
+    TextSurf, TextRect = text_in_screen('Пауза', small_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод текста на экран
     while pause:
@@ -71,7 +75,7 @@ def stopping():
 
 
 def draw_coins(coins):  # вывод количества очков на экран
-    conclusion = default_font.render(
+    conclusion = small_font.render(
         f'Количество очков: {coins}', True, 'black')
     screen.blit(conclusion, (0, 0))
 
@@ -87,7 +91,7 @@ def obstacles(thingx, thingy, thingw, thingh, color):  # отрисовка пр
     pygame.draw.rect(screen, color, [thingx, thingy, thingw, thingh])
 
 
-def game():
+def racing():
     global pause  # не забываем делать переменную pause глобальной
     ''' Критерии машины '''
     car_width = 73  # ширина машины
@@ -140,3 +144,5 @@ def game():
                 crash()  # функция столкновения
         pygame.display.flip()  # обновление экрана
         clock.tick(60)  # фпс
+
+#racing()

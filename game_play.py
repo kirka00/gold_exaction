@@ -1,5 +1,4 @@
 import pygame
-import sys
 from player import Player, Camera
 from levels import DemoLevel1, DemoLevel2, check, flag_on_lvl2
 from settings import terminate, scr_width, draw_text
@@ -8,7 +7,7 @@ from load import screen
 
 def play():  # основная тестовая функция
     global flag_on_lvl2
-    pygame.display.set_caption("1 уровень (бета)")  # название окна
+    pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
     player = Player()  # создание игрока
     level_list = [DemoLevel1(player), DemoLevel2(player)]  # уровни
     if flag_on_lvl2:  # выбор уровня
@@ -31,7 +30,7 @@ def play():  # основная тестовая функция
                 terminate()
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
-                    terminate()
+                    play()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево
@@ -53,8 +52,8 @@ def play():  # основная тестовая функция
             player.rect.right = scr_width
         cur_level.draw(screen)  # рисовка выбранного уровня
         active_session.draw(screen)
-        draw_text('Чтобы забрать печенье и подарок, нажмите "e".',
-                  'Также нажмите "е", когда заберётесь на трубу, чтобы перейти на следующий уровень.')
+        draw_text('Чтобы забрать печенье и подарок, нажмите [e].',
+                  'Также нажмите [е], когда заберётесь на трубу, чтобы перейти на следующий уровень.')
         clock.tick(30)  # fps
         pygame.display.flip()  # обновление экрана
     pygame.quit()  # закрытие игры
