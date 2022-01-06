@@ -1,6 +1,6 @@
 import pygame
 from player import Player, Camera
-from levels import DemoLevel1, DemoLevel2, check, flag_on_lvl2
+from levels import DemoLevel1, check, flag_on_lvl2, coins
 from settings import terminate, scr_width, draw_text
 from load import screen
 
@@ -9,7 +9,7 @@ def play():  # основная тестовая функция
     global flag_on_lvl2
     pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
     player = Player()  # создание игрока
-    level_list = [DemoLevel1(player), DemoLevel2(player)]  # уровни
+    level_list = [DemoLevel1(player)]  # уровни
     if flag_on_lvl2:  # выбор уровня
         cur_level = level_list[1]
         player.rect.x = 0  # начальное положение игрока
@@ -20,7 +20,6 @@ def play():  # основная тестовая функция
         player.rect.y = 520
     active_session = pygame.sprite.Group()  # активная сессия
     player.level = cur_level
-
     active_session.add(player)
     running = True  # флаг для цикла
     clock = pygame.time.Clock()  # для скорости обновления экрана
@@ -30,7 +29,7 @@ def play():  # основная тестовая функция
                 terminate()
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
-                    play()
+                    terminate()
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево

@@ -144,5 +144,3 @@ def racing():
                 crash()  # функция столкновения
         pygame.display.flip()  # обновление экрана
         clock.tick(60)  # фпс
-
-#racing()
