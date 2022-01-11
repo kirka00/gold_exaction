@@ -126,7 +126,7 @@ def racing():
         x += score_x  # перемещение машины
         screen.fill('white')  # пока фон белый
         obstacles(obstacle_start_x, obstacle_start_y,  # отрисовка препятствий
-                  obstacle_width, obstacle_height, (162, 101, 62))
+                  obstacle_width, obstacle_height, ('black'))
         obstacle_start_y += obstacle_speed  # корректировка y для препятствий
         draw_car(x, y)  # рисовка машины по x и y
         draw_coins(coins)  # вывод очков

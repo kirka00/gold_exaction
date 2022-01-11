@@ -73,7 +73,7 @@ class DemoLevel1(Level):
     def __init__(self, player):
         global cookies, presents, cookie, present, pipe
         Level.__init__(self, player)  # наследуем игрока
-        lvl_1 = load_level('level2.txt')  # преобразование уровня в текст
+        lvl_1 = load_level('level1.txt')  # преобразование уровня в текст
         for i in range(len(lvl_1)):
             for j in range(len(lvl_1[i])):
                 if lvl_1[i][j] != '2' and lvl_1[i][j] != '3' and lvl_1[i][j] != 0:
