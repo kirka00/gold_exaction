@@ -1,26 +1,17 @@
 import pygame
-from player import Player, Camera
-from levels import DemoLevel1, check, flag_on_lvl2, coins
-from settings import terminate, scr_width, draw_text
-from load import screen
+from player import Player
+from levels import DemoLevel1, check
+from settings import terminate, scr_width, draw_text, screen
 
 
 def play():  # основная тестовая функция
-    global flag_on_lvl2
     pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
     player = Player()  # создание игрока
-    level_list = [DemoLevel1(player)]  # уровни
-    if flag_on_lvl2:  # выбор уровня
-        cur_level = level_list[1]
-        player.rect.x = 0  # начальное положение игрока
-        player.rect.y = 20
-    else:
-        cur_level = level_list[0]
-        player.rect.x = 0  # начальное положение игрока
-        player.rect.y = 520
+    player.rect.y = 520  # спаун игрока внизу
+    level = DemoLevel1(player)
     active_session = pygame.sprite.Group()  # активная сессия
-    player.level = cur_level
-    active_session.add(player)
+    player.level = level  # добавление уровня
+    active_session.add(player)  # добавление игрока в группу спрайтов
     running = True  # флаг для цикла
     clock = pygame.time.Clock()  # для скорости обновления экрана
     while running:  # основной цикл
@@ -44,12 +35,12 @@ def play():  # основная тестовая функция
                 elif event.key == pygame.K_e:
                     check(player.rect)
         active_session.update()  # обновление игрока
-        cur_level.update()  # обновление уровня
+        level.update()  # обновление уровня
         if player.rect.left < 0:  # ограничение движения за экран слева
             player.rect.left = 0
         if player.rect.right > scr_width:  # справа
             player.rect.right = scr_width
-        cur_level.draw(screen)  # рисовка выбранного уровня
+        level.draw(screen)  # рисовка выбранного уровня
         active_session.draw(screen)
         draw_text('Чтобы забрать печенье и подарок, нажмите [e].',
                   'Также нажмите [е], когда заберётесь на трубу, чтобы перейти на следующий уровень.')

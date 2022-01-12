@@ -1,9 +1,8 @@
 import pygame
 import random
-from load import load_image, screen
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    small_font, terminate
+    small_font, terminate, load_image, screen
 
 
 def draw_car(x, y):  # рисовка машины в нужном месте

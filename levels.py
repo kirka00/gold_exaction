@@ -1,13 +1,11 @@
 from race import racing
-from load import load_image, load_level, screen
 import pygame
-from settings import small_font
+from settings import small_font, load_image, load_level, screen
 from json import dump
 cookies = pygame.sprite.Group()
 presents = pygame.sprite.Group()
 delete = False
 delete1 = False
-flag_on_lvl2 = False
 coins = 0
 cookie = ''
 present = ''
