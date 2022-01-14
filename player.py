@@ -35,7 +35,7 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
 
     def go_to_right(self):  # движение игрока вправо
         self.score_x = 10  # Двигаем игрока вправо по Х
-        if (not self.right):  # проверка на то, куда он смотрит
+        if not self.right:  # проверка на то, куда он смотрит
             self.flip()  # если нужно, то переворачиваем
             self.right = True
 

@@ -1,35 +1,26 @@
 import pygame
-from player import Player, Camera
-from levels import DemoLevel1, check, flag_on_lvl2, coins
-from settings import terminate, scr_width, draw_text
-from load import screen
+from player import Player
+from levels import Level, check, flag_on_lvl2
+from settings import terminate, scr_width, draw_text, screen
 
 
 def play():  # основная тестовая функция
-    global flag_on_lvl2
     pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
     player = Player()  # создание игрока
-    level_list = [DemoLevel1(player)]  # уровни
-    if flag_on_lvl2:  # выбор уровня
-        cur_level = level_list[1]
-        player.rect.x = 0  # начальное положение игрока
-        player.rect.y = 20
-    else:
-        cur_level = level_list[0]
-        player.rect.x = 0  # начальное положение игрока
-        player.rect.y = 520
+    player.rect.x, player.rect.y = 0, 20  # начальное положение игрока
     active_session = pygame.sprite.Group()  # активная сессия
-    player.level = cur_level
-    active_session.add(player)
+    cur_level = Level(player, 'level1.txt')  # переключения на 1 уровень
+    player.level = cur_level  # инициализация уровня
+    active_session.add(player)  # добавление игрока в игровую сессию
     running = True  # флаг для цикла
     clock = pygame.time.Clock()  # для скорости обновления экрана
     while running:  # основной цикл
         for event in pygame.event.get():  # следим за действиями играющего
             if event.type == pygame.QUIT:  # выход из игры
-                terminate()
+                terminate()  # полный выход из игры
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
-                    terminate()
+                    terminate()  # полный выход из игры
                 if event.key == pygame.K_UP:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево
@@ -42,7 +33,11 @@ def play():  # основная тестовая функция
                 elif event.key == pygame.K_RIGHT:
                     player.stop()  # остновка, если вправо
                 elif event.key == pygame.K_e:
-                    check(player.rect)
+                    if check(player.rect, cur_level):  # проверка выполнены ли условия для перехода на след лвл
+                        player.rect.x, player.rect.y = 0, 500  # начальное положение игрока
+                        cur_level.clear()  # очистить текущий уровень
+                        cur_level = Level(player, 'level2.txt')  # переключение на след уровень
+                        player.level = cur_level  # инициализация уровня
         active_session.update()  # обновление игрока
         cur_level.update()  # обновление уровня
         if player.rect.left < 0:  # ограничение движения за экран слева
@@ -51,8 +46,10 @@ def play():  # основная тестовая функция
             player.rect.right = scr_width
         cur_level.draw(screen)  # рисовка выбранного уровня
         active_session.draw(screen)
-        draw_text('Чтобы забрать печенье и подарок, нажмите [e].',
-                  'Также нажмите [е], когда заберётесь на трубу, чтобы перейти на следующий уровень.')
+        cur_level.render_coins(screen)
+        if flag_on_lvl2:
+            draw_text('Чтобы забрать печенье и подарок, нажмите [e].',
+                      'Также нажмите [е], когда заберётесь на трубу, чтобы перейти на следующий уровень.')
         clock.tick(30)  # fps
         pygame.display.flip()  # обновление экрана
     pygame.quit()  # закрытие игры
