@@ -1,7 +1,7 @@
 import pygame
 from game_play import play
-from load import load_image, screen
-from settings import terminate, default_font, repository, clock
+from settings import terminate, default_font, \
+    repository, clock, load_image, screen
 import webbrowser
 
 
@@ -22,20 +22,22 @@ class Menu:  # класс меню (делал Фёдор)
                 powerhost.blit(font.render(i[2], 1, i[3]), (i[0], i[1]))
 
     def menu(self):  # функция меню
-        animation_set = [load_image(f"santa{i}.png") for i in range(1, 13)]  # загрузка картинок для анимации
+        # загрузка картинок для анимации
+        animation_set = [load_image(f"santa{i}.png") for i in range(1, 13)]
         running = True  # флаг для цикла
-        points = 0  # переменная для пунктов меню 
+        points = 0  # переменная для пунктов меню
         n = 0  # переменная для анимациии
         while running:  # цикл меню
             pygame.display.update()  # обновление для курсора
             screen.blit(background_image, (0, 0))  # установка фона
             mp = pygame.mouse.get_pos()  # координаты улика мыши
-            screen.blit(animation_set[n // 12], (190, 25))  # анимация Деда Мороза
+            # анимация Деда Мороза
+            screen.blit(animation_set[n // 12], (190, 25))
             n += 1  # обновление переменной для анимации
             if n == 60:
                 n = 0
             clock.tick(60)  # фпс для анимации
-            for i in self.points:  # выбор мышкой 
+            for i in self.points:  # выбор мышкой
                 if i[0] + 100 > mp[0] > i[0] and i[1] + 50 > mp[1] > i[1]:
                     points = i[5]
             self.render(screen, default_font, points)  # рендер кнопки
@@ -46,7 +48,7 @@ class Menu:  # класс меню (делал Фёдор)
                     terminate()
                 if i.type == pygame.KEYDOWN:
                     if i.key == pygame.K_ESCAPE:  # немедленный выход
-                        terminate()                      
+                        terminate()
                 if i.type == pygame.MOUSEBUTTONDOWN and i.button == 1:
                     if points == 0:
                         play()
@@ -61,11 +63,11 @@ class Menu:  # класс меню (делал Фёдор)
                 pygame.display.flip()
         pygame.quit()
 
-    
+
 def support():
     global repository
     points = [(120, 140, f'GitHub', (41, 49, 51), (76, 81, 74), 3),
-               (120, 210, u'Back', (41, 49, 51), (76, 81, 74), 4)]
+              (120, 210, u'Back', (41, 49, 51), (76, 81, 74), 4)]
     game1 = Menu(points)
     game1.menu()
 

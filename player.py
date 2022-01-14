@@ -1,11 +1,9 @@
 import pygame
-from load import load_image
-from settings import scr_height, scr_width
+from settings import scr_height, scr_width, load_image
 
 
 class Player(pygame.sprite.Sprite):  # класс главного героя
-    # изображение главного героя
-    image = load_image('santa_test2.png')
+    image = load_image('santa_test2.png')  # изображение главного героя
 
     def __init__(self):
         super().__init__()
@@ -66,20 +64,3 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
 
     def flip(self):  # отражение изображения при повороте
         self.image = pygame.transform.flip(self.image, True, False)
-
-
-class Camera:
-    # зададим начальный сдвиг камеры
-    def __init__(self):
-        self.dx = 0
-        self.dy = 0
-        
-    # сдвинуть объект obj на смещение камеры
-    def apply(self, obj):
-        obj.rect.x += self.dx
-        obj.rect.y += self.dy
-    
-    # позиционировать камеру на объекте target
-    def update(self, target):
-        self.dx = -(target.rect.x + target.rect.w // 2 - scr_width // 2)
-        self.dy = -(target.rect.y + target.rect.h // 2 - scr_height // 2)

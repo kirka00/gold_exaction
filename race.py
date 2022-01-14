@@ -1,9 +1,8 @@
 import pygame
 import random
-from load import load_image, screen
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    small_font, terminate
+    small_font, terminate, load_image, screen
 
 
 def draw_car(x, y):  # рисовка машины в нужном месте
@@ -126,7 +125,7 @@ def racing():
         x += score_x  # перемещение машины
         screen.fill('white')  # пока фон белый
         obstacles(obstacle_start_x, obstacle_start_y,  # отрисовка препятствий
-                  obstacle_width, obstacle_height, (162, 101, 62))
+                  obstacle_width, obstacle_height, ('black'))
         obstacle_start_y += obstacle_speed  # корректировка y для препятствий
         draw_car(x, y)  # рисовка машины по x и y
         draw_coins(coins)  # вывод очков
