@@ -1,6 +1,7 @@
 from race import racing
 import pygame
 from settings import small_font, load_image, load_level
+from json import dump
 flag_on_lvl2 = True
 
 
@@ -101,6 +102,7 @@ class Level(object):  # класс для уровня
 
     def change_coins(self, coin):
         self.coins += coin
+        save_in_coins_txt(self.coins)  # сохранение монет в текстовый файл
 
 
 def check(coords, lvl):  # проверка для перехода на след лвл
@@ -117,9 +119,13 @@ def check(coords, lvl):  # проверка для перехода на сле�
         lvl.presents_delete()
     elif cor == cor1[0]:  # проверка находится ли игрок на трубе
         lvl.change_coins(30)
-        #  save_in_coins_txt(coins)  # сохранение монет в текстовый файл для статистики при смене уровня
         if not flag_on_lvl2:  # костыль убрать надо
             racing()
         else:
             flag_on_lvl2 = False
             return True
+
+
+def save_in_coins_txt(coins):  # сохранение очков в coins.txt
+    with open('coins.txt', encoding='utf8', mode='w') as file:
+        dump(coins, file)

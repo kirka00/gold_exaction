@@ -1,8 +1,15 @@
 import pygame
 import random
 from music import car_music
+from json import load
 from settings import scr_width, scr_height, clock, \
     small_font, terminate, load_image, screen
+
+
+def loading_coins():  # подгрузка из coins.txt
+    with open('coins.txt', encoding='utf8', mode='r') as file:
+        coins = load(file)
+        return coins
 
 
 def draw_car(x, y):  # рисовка машины в нужном месте
@@ -105,7 +112,7 @@ def racing():
     obstacle_start_y = -600  # выход препятствия сверху экрана
     obstacle_speed = 8  # начальная скорость препятствия
     obstacle_width, obstacle_height = 80, 10  # размер препятствия
-    coins = 0  # очки
+    coins = loading_coins()  # очки
     ''' Остальное '''
     pygame.display.set_caption(
         'Stealing gifts | Финал')  # заголовок экрана
@@ -142,7 +149,7 @@ def racing():
             coins += 1  # добавление очков
             obstacle_speed += 1  # ускорение препятствий
             # увеличение ширины препятствий для усложнения игры
-            obstacle_width += (coins * 1.5)
+            obstacle_width += 10
         if y < obstacle_start_y + obstacle_height:  # столкновение с препятствиями
             if x > obstacle_start_x and x < obstacle_start_x + obstacle_width or x+car_width > obstacle_start_x and x + car_width < obstacle_start_x + obstacle_width:
                 crash()  # функция столкновения
