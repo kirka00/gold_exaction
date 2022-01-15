@@ -1,6 +1,6 @@
 from race import racing
 import pygame
-from settings import small_font, load_image, load_level
+from settings import default_font, load_image, load_level
 from json import dump
 flag_on_lvl2 = True
 
@@ -96,16 +96,16 @@ class Level(object):  # класс для уровня
         return self.coords_objects
 
     def render_coins(self, screen):  # отображение монет
-        conclusion = small_font.render(
+        conclusion = default_font.render(
             f'Количество очков: {self.coins}', True, 'black')
-        screen.blit(conclusion, (100, 100))
+        screen.blit(conclusion, (100, 120))
 
     def change_coins(self, coin):
         self.coins += coin
 
 
 def check(coords, lvl):  # проверка для перехода на след лвл
-    global coins, flag_on_lvl2
+    global flag_on_lvl2
     cor, cor1 = (coords[0] // 32, (coords[1] - 24) //
                  32), lvl.coords()  # преобразовка для удобства
     if cor == cor1[1]:  # проверка находится ли игрок на печеньке

@@ -1,7 +1,7 @@
 import pygame
 from player import Player
-from levels import Level, check, flag_on_lvl2
-from settings import terminate, scr_width, draw_text, screen
+from levels import Level, check
+from settings import terminate, scr_width, screen
 
 
 def play():  # основная тестовая функция
@@ -34,7 +34,7 @@ def play():  # основная тестовая функция
                     player.stop()  # остновка, если вправо
                 elif event.key == pygame.K_e:
                     # проверка выполнены ли условия для перехода на след лвл
-                    if check(player.rect, cur_level):
+                    if check(player.rect, cur_level):  # проверка перешёл ли игрок в трубу
                         player.rect.x, player.rect.y = 0, 500  # начальное положение игрока
                         cur_level.clear()  # очистить текущий уровень
                         # переключение на след уровень
@@ -48,10 +48,7 @@ def play():  # основная тестовая функция
             player.rect.right = scr_width
         cur_level.draw(screen)  # рисовка выбранного уровня
         active_session.draw(screen)
-        cur_level.render_coins(screen)
-        if flag_on_lvl2:
-            draw_text('Чтобы забрать печенье и подарок, нажмите [e].',
-                      'Также нажмите [е], когда заберётесь на трубу, чтобы перейти на следующий уровень.')
+        cur_level.render_coins(screen)  # прорисовка монет
         clock.tick(30)  # fps
         pygame.display.flip()  # обновление экрана
     pygame.quit()  # закрытие игры

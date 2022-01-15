@@ -2,7 +2,7 @@ import pygame
 import random
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    small_font, terminate, load_image, screen
+    default_font, terminate, load_image, screen
 
 
 def draw_car(x, y):  # рисовка машины в нужном месте
@@ -12,9 +12,10 @@ def draw_car(x, y):  # рисовка машины в нужном месте
 
 def crash():  # столкновение
     pygame.mixer.music.stop()  # глушим звук мотора
-    TextSurf, TextRect = text_in_screen('Вы умерли!', small_font)
+    TextSurf, TextRect = text_in_screen('Вы умерли!', default_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод информации о проигрыше
+    pygame.mouse.set_visible(True)
     while True:  # пока есть возможность переиграть
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -41,7 +42,7 @@ def button(msg, x, y, w, h, color, direct_color, do=None):  # рисовка к�
             do()  # срабатывает нужная нам функция
     else:  # в ином случае просто рисуем обычные кнопки
         pygame.draw.rect(screen, color, (x, y, w, h))
-    textSurf, textRect = text_in_screen(msg, small_font)  # настройка текста
+    textSurf, textRect = text_in_screen(msg, default_font)  # настройка текста
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)  # вывод кнопок на экран
 
@@ -54,7 +55,7 @@ def continuation():  # продолжегне игры
 
 def stopping():
     pygame.mixer.music.pause()
-    TextSurf, TextRect = text_in_screen('Пауза', small_font)
+    TextSurf, TextRect = text_in_screen('Пауза', default_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод текста на экран
     while pause:
@@ -74,7 +75,7 @@ def stopping():
 
 
 def draw_coins(coins):  # вывод количества очков на экран
-    conclusion = small_font.render(
+    conclusion = default_font.render(
         f'Количество очков: {coins}', True, 'black')
     screen.blit(conclusion, (0, 0))
 
@@ -92,6 +93,7 @@ def obstacles(thingx, thingy, thingw, thingh, color):  # отрисовка пр
 
 def racing():
     global pause  # не забываем делать переменную pause глобальной
+    pygame.mouse.set_visible(False)
     ''' Критерии машины '''
     car_width = 73  # ширина машины
     x, y = scr_width / 2 - 30, 480  # спаун машины
@@ -106,8 +108,7 @@ def racing():
     ''' Остальное '''
     pygame.display.set_caption(
         'Stealing gifts | Финал')  # заголовок экрана
-    pause = False  # рауза игры
-    pygame.mouse.set_visible(True)
+    pause = False  # пауза игры
     car_music()
     while True:
         for event in pygame.event.get():  # отслеживание действий
