@@ -33,10 +33,12 @@ def play():  # основная тестовая функция
                 elif event.key == pygame.K_RIGHT:
                     player.stop()  # остновка, если вправо
                 elif event.key == pygame.K_e:
-                    if check(player.rect, cur_level):  # проверка выполнены ли условия для перехода на след лвл
+                    # проверка выполнены ли условия для перехода на след лвл
+                    if check(player.rect, cur_level):
                         player.rect.x, player.rect.y = 0, 500  # начальное положение игрока
                         cur_level.clear()  # очистить текущий уровень
-                        cur_level = Level(player, 'level2.txt')  # переключение на след уровень
+                        # переключение на след уровень
+                        cur_level = Level(player, 'level2.txt')
                         player.level = cur_level  # инициализация уровня
         active_session.update()  # обновление игрока
         cur_level.update()  # обновление уровня

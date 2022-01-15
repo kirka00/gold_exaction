@@ -107,6 +107,7 @@ def racing():
     pygame.display.set_caption(
         'Stealing gifts | Финал')  # заголовок экрана
     pause = False  # рауза игры
+    pygame.mouse.set_visible(True)
     car_music()
     while True:
         for event in pygame.event.get():  # отслеживание действий
@@ -120,6 +121,8 @@ def racing():
                 elif event.key == pygame.K_SPACE:  # пауза
                     pause = True  # флаг на True
                     stopping()  # аызов функции паузы
+                elif event.key == pygame.K_ESCAPE:  # пауза
+                    terminate()
             elif event.type == pygame.KEYUP:  # остановка движения машины при отсутствии нажатия на кнопки
                 score_x = 0
         x += score_x  # перемещение машины

@@ -41,7 +41,8 @@ class Level(object):  # класс для уровня
         self.platforms = pygame.sprite.Group()  # группа спрайтов
         self.cookies = pygame.sprite.Group()
         self.presents = pygame.sprite.Group()
-        self.coords_objects = [(), (), (), 10, 20]  # 0 - труба 1 - печенька 2 - подарок 3, 4 - очки за подарок, печенье
+        # 0 - труба 1 - печенька 2 - подарок 3, 4 - очки за подарок, печенье
+        self.coords_objects = [(), (), (), 10, 20]
         lvl_1 = load_level(name)  # преобразование уровня в текст
         for i in range(len(lvl_1)):
             for j in range(len(lvl_1[i])):
@@ -50,7 +51,8 @@ class Level(object):  # класс для уровня
                         block = BlockBricks(32, 32)
                     elif lvl_1[i][j] == '6':
                         block = Pipe()
-                        self.coords_objects[0] = (j, i - 2)  # добавление координат трубы
+                        # добавление координат трубы
+                        self.coords_objects[0] = (j, i - 2)
                     elif lvl_1[i][j] == '9':
                         block = BlockBricks(0, 0)
                     block.rect.x, block.rect.y = j * 32, i * 32 + 24  # координата x и y
@@ -59,12 +61,14 @@ class Level(object):  # класс для уровня
                     cok = Cookie()
                     cok.rect.x, cok.rect.y = j * 32, i * 32 + 24  # координата x и y
                     self.cookies.add(cok)  # добавление в группу
-                    self.coords_objects[1] = (j, i - 1)  # добавление координат печеньки
+                    # добавление координат печеньки
+                    self.coords_objects[1] = (j, i - 1)
                 elif lvl_1[i][j] == '3':
                     pres = Presents()
                     pres.rect.x, pres.rect.y = j * 32, i * 32 + 24   # координата x и y
                     self.presents.add(pres)  # добавление в группу
-                    self.coords_objects[2] = (j, i - 1)  # добавление координат подарка
+                    # добавление координат подарка
+                    self.coords_objects[2] = (j, i - 1)
 
     def draw(self, screen):  # рисовка объектов
         screen.blit(load_image('back_game3.png'), (0, 0))  # задний фон
@@ -102,7 +106,8 @@ class Level(object):  # класс для уровня
 
 def check(coords, lvl):  # проверка для перехода на след лвл
     global coins, flag_on_lvl2
-    cor, cor1 = (coords[0] // 32, (coords[1] - 24) // 32), lvl.coords()  # преобразовка для удобства
+    cor, cor1 = (coords[0] // 32, (coords[1] - 24) //
+                 32), lvl.coords()  # преобразовка для удобства
     if cor == cor1[1]:  # проверка находится ли игрок на печеньке
         lvl.change_coins(cor1[4])  # добавление очков
         lvl.coords_objects[4] = 0

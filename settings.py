@@ -2,7 +2,7 @@ import pygame
 import sys
 import os
 
-# основные функции
+
 def draw_text(text1, text2):  # вывод сообщения на экран
     conclusion1 = small_font.render(
         f'{text1}', True, 'black')
@@ -12,7 +12,7 @@ def draw_text(text1, text2):  # вывод сообщения на экран
     screen.blit(conclusion2, (0, 0))
 
 
-def load_image(name, colorkey=None):
+def load_image(name, colorkey=None):  # загрузка текстур
     fullname = os.path.join('data/images', name)
     if not os.path.isfile(fullname):
         print(f"Файл с изображением '{fullname}' не найден")
@@ -28,7 +28,7 @@ def load_image(name, colorkey=None):
     return image
 
 
-def load_level(filename):
+def load_level(filename):  # загрузка уровня
     filename = "data/" + filename
     # читаем уровень, убирая символы перевода строки
     with open(filename, 'r') as mapFile:
