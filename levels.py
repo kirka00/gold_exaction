@@ -123,6 +123,3 @@ def check(coords, lvl):  # проверка для перехода на сле�
         else:
             flag_on_lvl2 = False
             return True
-
-
-

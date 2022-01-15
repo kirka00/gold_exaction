@@ -7,7 +7,7 @@ from settings import terminate, scr_width, screen, clock
 def play():  # основная тестовая функция
     pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
     player = Player()  # создание игрока
-    player.rect.x, player.rect.y = 0, 20  # начальное положение игрока
+    player.rect.x, player.rect.y = 0, 20  # начальное положение игрока на 1ом уровне
     active_session = pygame.sprite.Group()  # активная сессия
     cur_level = Level(player, 'level1.txt')  # переключения на 1 уровень
     player.level = cur_level  # инициализация уровня

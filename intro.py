@@ -41,7 +41,8 @@ class Menu:  # класс меню (делал Фёдор)
             clock.tick(60)  # фпс для анимации
             for i in self.points:  # выбор мышкой
                 if i[0] + 100 > mp[0] > i[0] and i[1] + 50 > mp[1] > i[1]:
-                    points = i[5]  # 5 элемент это номер типа int у каждой кнопки он разный
+                    # 5 элемент это номер типа int у каждой кнопки он разный
+                    points = i[5]
             self.render(screen, small_font, points)  # рендер кнопки
             screen.blit(cursor, mp)  # курсор мыши
             for i in pygame.event.get():
@@ -79,7 +80,8 @@ def support():
 
 def intro_func():
     points = [(120, 70, u'Game', (41, 49, 51), (76, 81, 74), 0),  # запуск
-              (120, 140, u'Support', (41, 49, 51), (76, 81, 74), 2),  # сылка на гит
+              (120, 140, u'Support', (41, 49, 51),
+               (76, 81, 74), 2),  # сылка на гит
               (120, 210, u'Quit', (41, 49, 51), (76, 81, 74), 3)]  # выход
     game = Menu(points)
     game.menu()
