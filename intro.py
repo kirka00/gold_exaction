@@ -1,6 +1,6 @@
 import pygame
 from game_play import play
-from settings import terminate, default_font, repository, clock, load_image, screen, draw_text, text1, text2
+from settings import terminate, default_font, repository, clock, load_image, screen, draw_text, text
 import webbrowser
 
 
@@ -20,15 +20,15 @@ class Menu:  # класс меню (делал Фёдор)
             else:
                 powerhost.blit(font.render(i[2], 1, i[3]), (i[0], i[1]))
 
-    def menu(self, animation=True):  # функция меню
+    def menu(self, animation=True, inf=False):  # функция меню
         # загрузка картинок для анимации
         animation_set = [load_image(f"santa{i}.png") for i in range(1, 13)]
         running = True  # флаг для цикла
         points = 0  # переменная для пунктов меню
         n = 0  # переменная для анимациии
         while running:  # цикл меню
-            #  for i in text1: отрисовка которая не работает
-            #      draw_text(i[0], i[1])
+            if inf:  # питону тяжело и если резко дёргать мышку он не успевает отрисовывать
+                draw_text()  # изображение информации
             pygame.display.update()  # обновление для курсора
             screen.blit(background_image, (0, 0))  # установка фона
             mp = pygame.mouse.get_pos()  # координаты улика мыши
@@ -52,10 +52,9 @@ class Menu:  # класс меню (делал Фёдор)
                     if i.key == pygame.K_ESCAPE:  # немедленный выход
                         terminate()
                 if i.type == pygame.MOUSEBUTTONDOWN and i.button == 1:
+                    #  print(points)
                     if points == 0:
                         play()  # запуск игры
-                    elif points == 1:
-                        setting()  # настройки
                     elif points == 2:
                         support()  # информация
                     elif points == 3:
@@ -80,20 +79,13 @@ def support():
 
 def intro_func():
     points = [(120, 70, u'Game', (41, 49, 51), (76, 81, 74), 0),  # запуск
-              (120, 140, u'Settings', (41, 49, 51), (76, 81, 74), 1),  # настройки
-              (120, 210, u'Support', (41, 49, 51), (76, 81, 74), 2),  # сылка на гит
-              (120, 280, u'Quit', (41, 49, 51), (76, 81, 74), 3)]  # выход
+              (120, 140, u'Support', (41, 49, 51), (76, 81, 74), 2),  # сылка на гит
+              (120, 210, u'Quit', (41, 49, 51), (76, 81, 74), 3)]  # выход
     game = Menu(points)
     game.menu()
 
 
 def info():
-    points = [(360, 400, u'Back', (41, 49, 51), (76, 81, 74), 9)]
+    points = [(360, 450, u'Back', (41, 49, 51), (76, 81, 74), 9)]
     game1 = Menu(points)
-    game1.menu(False)
-
-
-def setting():
-    points = [(360, 400, u'Back', (41, 49, 51), (76, 81, 74), 9)]
-    game1 = Menu(points)
-    game1.menu(False)
+    game1.menu(False, True)
