@@ -71,7 +71,7 @@ class Level(object):  # класс для уровня
                     self.coords_objects[2] = (j, i - 1)
 
     def draw(self, screen):  # рисовка объектов
-        screen.blit(load_image('back_game3.png'), (0, 0))  # задний фон
+        screen.blit(load_image('back_game.png'), (0, 0))  # задний фон
         self.platforms.draw(screen)  # отрисовка блоков
         self.cookies.draw(screen)  # отрисовка печенек
         self.presents.draw(screen)  # отрисовка подарков
