@@ -1,12 +1,12 @@
 import pygame
 from game_play import play
-from settings import terminate, default_font, repository, clock, load_image, screen, draw_text, text
+from settings import terminate, small_font, repository, clock, load_image, screen, draw_text, text
 import webbrowser
 
 
 background_image = load_image("background.png")  # установка заднего фона
 pygame.mouse.set_visible(False)  # отключение стандартного курсора
-cursor = load_image('cur\cursor_standart.png')  # загрузка курсора
+cursor = load_image('cursor.png')  # загрузка курсора
 
 
 class Menu:  # класс меню (делал Фёдор)
@@ -42,7 +42,7 @@ class Menu:  # класс меню (делал Фёдор)
             for i in self.points:  # выбор мышкой
                 if i[0] + 100 > mp[0] > i[0] and i[1] + 50 > mp[1] > i[1]:
                     points = i[5]  # 5 элемент это номер типа int у каждой кнопки он разный
-            self.render(screen, default_font, points)  # рендер кнопки
+            self.render(screen, small_font, points)  # рендер кнопки
             screen.blit(cursor, mp)  # курсор мыши
             for i in pygame.event.get():
                 if i.type == pygame.QUIT:

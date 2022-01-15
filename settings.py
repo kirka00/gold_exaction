@@ -36,7 +36,9 @@ def load_level(filename):  # загрузка уровня
 
 pygame.init()  # инициализация для шрифтов
 default_font = pygame.font.Font(
-    'data/fonts/Oswald-Light.ttf', 40)  # стандартный шрифт
+    'data/fonts/Oswald-Light.ttf', 35)  # стандартный шрифт
+small_font = pygame.font.Font(
+    'data/fonts/Oswald-Light.ttf', 30)  # шрифт поменьше
 # основные настройки
 screen = pygame.display.set_mode([800, 600])  # установка размеров окна
 size = scr_width, scr_height = 800, 600  # размеры окна

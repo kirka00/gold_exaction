@@ -1,9 +1,9 @@
 import pygame
-from settings import scr_height, scr_width, load_image
+from settings import scr_height, load_image
 
 
 class Player(pygame.sprite.Sprite):  # класс главного героя
-    image = load_image('santa_test2.png')  # изображение главного героя
+    image = load_image('santa.png')  # изображение главного героя
 
     def __init__(self):
         super().__init__()
@@ -20,11 +20,11 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
             self.rect.y = scr_height - self.rect.height
 
     def jump(self):  # прыжок
-        self.rect.y += 10  # проверяем, есть ли что-то над героем
+        self.rect.y += 10  # проверяем, есть ли что-то под героем
         collide = pygame.sprite.spritecollide(
             self, self.level.platforms, False)  # проверка на коллизию
-        self.rect.y -= 10  # возращение на "землю"
-        if self.rect.bottom >= scr_height or len(collide) > 0:
+        self.rect.y -= 10  # возращение на исходную позицию
+        if len(collide) > 0:
             self.score_y = -16   # прыгаем, если ничего не мешает
 
     def go_to_left(self):  # движение игрока влево

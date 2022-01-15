@@ -1,7 +1,7 @@
 import pygame
 from player import Player
 from levels import Level, check
-from settings import terminate, scr_width, screen
+from settings import terminate, scr_width, screen, clock
 
 
 def play():  # основная тестовая функция
@@ -13,7 +13,6 @@ def play():  # основная тестовая функция
     player.level = cur_level  # инициализация уровня
     active_session.add(player)  # добавление игрока в игровую сессию
     running = True  # флаг для цикла
-    clock = pygame.time.Clock()  # для скорости обновления экрана
     while running:  # основной цикл
         for event in pygame.event.get():  # следим за действиями играющего
             if event.type == pygame.QUIT:  # выход из игры

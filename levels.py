@@ -1,7 +1,6 @@
 from race import racing
 import pygame
-from settings import default_font, load_image, load_level
-from json import dump
+from settings import small_font, load_image, load_level
 flag_on_lvl2 = True
 
 
@@ -71,7 +70,7 @@ class Level(object):  # класс для уровня
                     self.coords_objects[2] = (j, i - 1)
 
     def draw(self, screen):  # рисовка объектов
-        screen.blit(load_image('back_game.png'), (0, 0))  # задний фон
+        screen.blit(load_image('back_game3.png'), (0, 0))  # задний фон
         self.platforms.draw(screen)  # отрисовка блоков
         self.cookies.draw(screen)  # отрисовка печенек
         self.presents.draw(screen)  # отрисовка подарков
@@ -96,7 +95,7 @@ class Level(object):  # класс для уровня
         return self.coords_objects
 
     def render_coins(self, screen):  # отображение монет
-        conclusion = default_font.render(
+        conclusion = small_font.render(
             f'Количество очков: {self.coins}', True, 'black')
         screen.blit(conclusion, (100, 120))
 
@@ -126,6 +125,4 @@ def check(coords, lvl):  # проверка для перехода на сле�
             return True
 
 
-def save_in_coins_txt(coins):  # сохранение очков в coins.txt
-    with open('coins.txt', encoding='utf8', mode='w') as file:
-        dump(coins, file)
+

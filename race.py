@@ -2,7 +2,7 @@ import pygame
 import random
 from music import car_music
 from settings import scr_width, scr_height, clock, \
-    default_font, terminate, load_image, screen
+    small_font, terminate, load_image, screen
 
 
 def draw_car(x, y):  # рисовка машины в нужном месте
@@ -12,7 +12,7 @@ def draw_car(x, y):  # рисовка машины в нужном месте
 
 def crash():  # столкновение
     pygame.mixer.music.stop()  # глушим звук мотора
-    TextSurf, TextRect = text_in_screen('Вы умерли!', default_font)
+    TextSurf, TextRect = text_in_screen('Вы умерли!', small_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод информации о проигрыше
     pygame.mouse.set_visible(True)
@@ -42,7 +42,7 @@ def button(msg, x, y, w, h, color, direct_color, do=None):  # рисовка к�
             do()  # срабатывает нужная нам функция
     else:  # в ином случае просто рисуем обычные кнопки
         pygame.draw.rect(screen, color, (x, y, w, h))
-    textSurf, textRect = text_in_screen(msg, default_font)  # настройка текста
+    textSurf, textRect = text_in_screen(msg, small_font)  # настройка текста
     textRect.center = ((x + (w / 2)), (y + (h / 2)))
     screen.blit(textSurf, textRect)  # вывод кнопок на экран
 
@@ -55,7 +55,7 @@ def continuation():  # продолжегне игры
 
 def stopping():
     pygame.mixer.music.pause()
-    TextSurf, TextRect = text_in_screen('Пауза', default_font)
+    TextSurf, TextRect = text_in_screen('Пауза', small_font)
     TextRect.center = ((scr_width / 2), (scr_height / 2))
     screen.blit(TextSurf, TextRect)  # вывод текста на экран
     while pause:
@@ -75,7 +75,7 @@ def stopping():
 
 
 def draw_coins(coins):  # вывод количества очков на экран
-    conclusion = default_font.render(
+    conclusion = small_font.render(
         f'Количество очков: {coins}', True, 'black')
     screen.blit(conclusion, (0, 0))
 
@@ -85,10 +85,11 @@ def text_in_screen(text, font):  # вывод текста на экран
     return conclusion, conclusion.get_rect()
 
 
-def obstacles(thingx, thingy, thingw, thingh, color):  # отрисовка препятсвий
+def obstacles(obstacle_x, obstacle_y, obstacle_w, obstacle_h, color):  # отрисовка препятсвий
     tree = load_image('tree.png')
-    screen.blit(tree, (thingx + 15, thingy - 100))
-    pygame.draw.rect(screen, color, [thingx, thingy, thingw, thingh])
+    screen.blit(tree, (obstacle_x + 15, obstacle_y - 100))
+    pygame.draw.rect(
+        screen, color, [obstacle_x, obstacle_y, obstacle_w, obstacle_h])
 
 
 def racing():
