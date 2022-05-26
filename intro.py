@@ -22,7 +22,7 @@ class Menu:  # класс меню (делал Фёдор)
 
     def menu(self, animation=True, inf=False):  # функция меню
         # загрузка картинок для анимации
-        animation_set = [load_image(f"santa{i}.png") for i in range(1, 13)]
+        # animation_set = [load_image(f"santa{i}.png") for i in range(1, 13)]
         running = True  # флаг для цикла
         points = 0  # переменная для пунктов меню
         n = 0  # переменная для анимациии
@@ -33,11 +33,11 @@ class Menu:  # класс меню (делал Фёдор)
             screen.blit(background_image, (0, 0))  # установка фона
             mp = pygame.mouse.get_pos()  # координаты улика мыши
             # анимация Деда Мороза
-            if animation:
-                screen.blit(animation_set[n // 12], (190, 25))
-            n += 1  # обновление переменной для анимации
-            if n == 60:
-                n = 0
+            # if animation:
+            #     screen.blit(animation_set[n // 12], (190, 25))
+            # n += 1  # обновление переменной для анимации
+            #  if n == 60:
+            #     n = 0
             clock.tick(60)  # фпс для анимации
             for i in self.points:  # выбор мышкой
                 if i[0] + 100 > mp[0] > i[0] and i[1] + 50 > mp[1] > i[1]:
@@ -88,6 +88,6 @@ def intro_func():
 
 
 def info():
-    points = [(360, 450, u'Back', (41, 49, 51), (76, 81, 74), 9)]
+    points = [(360, 350, u'Back', (41, 49, 51), (76, 81, 74), 9)]
     game1 = Menu(points)
     game1.menu(False, True)

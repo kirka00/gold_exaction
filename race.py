@@ -115,9 +115,10 @@ def racing():
     coins = loading_coins()  # очки
     ''' Остальное '''
     pygame.display.set_caption(
-        'Stealing gifts | Финал')  # заголовок экрана
+        'Breaking Bad | Погоня')  # заголовок экрана
     pause = False  # пауза игры
     car_music()
+    pygame.display.set_mode((800, 600))
     while True:
         for event in pygame.event.get():  # отслеживание действий
             if event.type == pygame.QUIT:  # выход из игры

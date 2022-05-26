@@ -7,7 +7,8 @@ from settings import size
 def main():  # основная функция игры
     pygame.init()  # Инициализация
     screen = pygame.display.set_mode(size)  # установка размеров окна
-    pygame.display.set_caption('Stealing gifts')  # заголовок окна
+    pygame.display.set_mode((800, 450))
+    pygame.display.set_caption('Breaking Bad')  # заголовок окна
     running = True
     main_sound()
     while running:  # основной цикл игры

@@ -40,10 +40,10 @@ default_font = pygame.font.Font(
 small_font = pygame.font.Font(
     'data/fonts/Oswald-Light.ttf', 30)  # шрифт поменьше
 # основные настройки
-screen = pygame.display.set_mode([800, 600])  # установка размеров окна
-size = scr_width, scr_height = 800, 600  # размеры окна
+screen = pygame.display.set_mode([800, 450])  # установка размеров окна
+size = scr_width, scr_height = 1365, 843  # размеры окна
 clock = pygame.time.Clock()
-pygame.display.set_icon(load_image("tree.png"))
+pygame.display.set_icon(load_image("bottle.png"))
 repository = 'https://github.com/kirka00/stealing_gifts/'
 text = [['Для взаимодействия с объектами нажимайте кнопку E', (10, 0)],
         ['Управлять персонажем можно с помощью стрелочек', (10, 100)],

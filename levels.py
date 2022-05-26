@@ -13,10 +13,10 @@ class BlockBricks(pygame.sprite.Sprite):  # класс для платформ
         self.rect.width, self.rect.height = width, height
 
 
-class Cookie(pygame.sprite.Sprite):
+class Bottle(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = load_image('cookie.png')  # изображение платформы
+        self.image = load_image('bottle.png')  # изображение платформы
         self.rect = self.image.get_rect()  # установка размеров
 
 
@@ -27,11 +27,12 @@ class Presents(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()  # установка размеров
 
 
-class Pipe(pygame.sprite.Sprite):
-    def __init__(self):
+class Station(pygame.sprite.Sprite):
+    def __init__(self, width, height):
         super().__init__()
-        self.image = load_image('pipe.png')  # изображение платформы
+        self.image = load_image('station.png')  # изображение платформы
         self.rect = self.image.get_rect()  # установка размеров
+        self.rect.width, self.rect.height = width, height
 
 
 class Level(object):  # класс для уровня
@@ -50,28 +51,28 @@ class Level(object):  # класс для уровня
                     if lvl_1[i][j] == '1':
                         block = BlockBricks(32, 32)
                     elif lvl_1[i][j] == '6':
-                        block = Pipe()
+                        block = Station(0, 0)
                         # добавление координат трубы
-                        self.coords_objects[0] = (j, i - 2)
+                        self.coords_objects[0] = (j, i)
                     elif lvl_1[i][j] == '9':
                         block = BlockBricks(0, 0)
                     block.rect.x, block.rect.y = j * 32, i * 32 + 24  # координата x и y
                     self.platforms.add(block)  # добавление в группу
                 elif lvl_1[i][j] == '2':
-                    cok = Cookie()
+                    cok = Bottle()
                     cok.rect.x, cok.rect.y = j * 32, i * 32 + 24  # координата x и y
                     self.cookies.add(cok)  # добавление в группу
                     # добавление координат печеньки
                     self.coords_objects[1] = (j, i - 1)
                 elif lvl_1[i][j] == '3':
-                    pres = Presents()
+                    pres = Bottle()
                     pres.rect.x, pres.rect.y = j * 32, i * 32 + 24   # координата x и y
                     self.presents.add(pres)  # добавление в группу
                     # добавление координат подарка
                     self.coords_objects[2] = (j, i - 1)
 
     def draw(self, screen):  # рисовка объектов
-        screen.blit(load_image('back_game3.png'), (0, 0))  # задний фон
+        screen.blit(load_image('backgame.png'), (0, 0))  # задний фон
         self.platforms.draw(screen)  # отрисовка блоков
         self.cookies.draw(screen)  # отрисовка печенек
         self.presents.draw(screen)  # отрисовка подарков

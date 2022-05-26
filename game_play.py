@@ -5,9 +5,10 @@ from settings import terminate, scr_width, screen, clock
 
 
 def play():  # основная тестовая функция
-    pygame.display.set_caption('Stealing gifts | 1 уровень')  # название окна
+    pygame.display.set_caption('Breaking Bad | Варка')  # название окна
+    pygame.display.set_mode((1400, 875))
     player = Player()  # создание игрока
-    player.rect.x, player.rect.y = 0, 20  # начальное положение игрока на 1ом уровне
+    player.rect.x, player.rect.y = 0, 600  # начальное положение игрока на 1ом уровне
     active_session = pygame.sprite.Group()  # активная сессия
     cur_level = Level(player, 'level1.txt')  # переключения на 1 уровень
     player.level = cur_level  # инициализация уровня
@@ -20,7 +21,7 @@ def play():  # основная тестовая функция
             if event.type == pygame.KEYDOWN:  # обработка клавиатуры
                 if event.key == pygame.K_ESCAPE:
                     terminate()  # полный выход из игры
-                if event.key == pygame.K_UP:  # прыжок
+                if event.key == pygame.K_UP or event.key == pygame.K_SPACE:  # прыжок
                     player.jump()
                 elif event.key == pygame.K_LEFT:  # влево
                     player.go_to_left()
@@ -34,7 +35,7 @@ def play():  # основная тестовая функция
                 elif event.key == pygame.K_e:
                     # проверка выполнены ли условия для перехода на след лвл
                     if check(player.rect, cur_level):  # проверка перешёл ли игрок в трубу
-                        player.rect.x, player.rect.y = 0, 500  # начальное положение игрока
+                        player.rect.x, player.rect.y = 0, 750  # начальное положение игрока
                         cur_level.clear()  # очистить текущий уровень
                         # переключение на след уровень
                         cur_level = Level(player, 'level2.txt')

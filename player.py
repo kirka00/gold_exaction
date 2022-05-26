@@ -9,6 +9,7 @@ class Player(pygame.sprite.Sprite):  # класс главного героя
         super().__init__()
         self.right = True  # изначально герой повернут вправо
         self.hero_image = Player.image
+        print(self.hero_image.get_rect())
         self.rect = self.hero_image.get_rect()  # размеры игрока
         self.score_x = 0  # векторы скорости игрока
         self.score_y = 0
